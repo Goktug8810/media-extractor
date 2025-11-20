@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MediaExtractor.Application\MediaExtractor.Application.csproj" />
+        <ProjectReference Include="..\MediaExtractor.Infrastructure\MediaExtractor.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

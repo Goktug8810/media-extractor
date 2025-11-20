@@ -1,0 +1,210 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "Microsoft.AspNetCore.OpenApi/9.0.8": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.OpenApi": "1.6.17"
+        },
+        "compile": {
+          "lib/net9.0/Microsoft.AspNetCore.OpenApi.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.AspNetCore.OpenApi.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Microsoft.OpenApi/1.6.17": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "MediaExtractor.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "MediaExtractor.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MediaExtractor.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MediaExtractor.Application.dll": {}
+        }
+      },
+      "MediaExtractor.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/MediaExtractor.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MediaExtractor.Domain.dll": {}
+        }
+      },
+      "MediaExtractor.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "MediaExtractor.Application": "1.0.0",
+          "MediaExtractor.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MediaExtractor.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MediaExtractor.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.AspNetCore.OpenApi/9.0.8": {
+      "sha512": "BwF9sQCKmvu93C/pmKxJjPhF5fFB23MEcgTsGL+7W3wKLYawS4lyFSL5/qh00IJzuADLf+1SmvxMaphbyZYqQQ==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.openapi/9.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net9.0/Microsoft.AspNetCore.OpenApi.dll",
+        "lib/net9.0/Microsoft.AspNetCore.OpenApi.xml",
+        "microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+        "microsoft.aspnetcore.openapi.nuspec"
+      ]
+    },
+    "Microsoft.OpenApi/1.6.17": {
+      "sha512": "Le+kehlmrlQfuDFUt1zZ2dVwrhFQtKREdKBo+rexOwaCoYP0/qpgT9tLxCsZjsgR5Itk1UKPcbgO+FyaNid/bA==",
+      "type": "package",
+      "path": "microsoft.openapi/1.6.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/netstandard2.0/Microsoft.OpenApi.dll",
+        "lib/netstandard2.0/Microsoft.OpenApi.pdb",
+        "lib/netstandard2.0/Microsoft.OpenApi.xml",
+        "microsoft.openapi.1.6.17.nupkg.sha512",
+        "microsoft.openapi.nuspec"
+      ]
+    },
+    "MediaExtractor.Application/1.0.0": {
+      "type": "project",
+      "path": "../MediaExtractor.Application/MediaExtractor.Application.csproj",
+      "msbuildProject": "../MediaExtractor.Application/MediaExtractor.Application.csproj"
+    },
+    "MediaExtractor.Domain/1.0.0": {
+      "type": "project",
+      "path": "../MediaExtractor.Domain/MediaExtractor.Domain.csproj",
+      "msbuildProject": "../MediaExtractor.Domain/MediaExtractor.Domain.csproj"
+    },
+    "MediaExtractor.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../MediaExtractor.Infrastructure/MediaExtractor.Infrastructure.csproj",
+      "msbuildProject": "../MediaExtractor.Infrastructure/MediaExtractor.Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "MediaExtractor.Application >= 1.0.0",
+      "MediaExtractor.Infrastructure >= 1.0.0",
+      "Microsoft.AspNetCore.OpenApi >= 9.0.8"
+    ]
+  },
+  "packageFolders": {
+    "/Users/goktugacikgoz/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/goktugacikgoz/Documents/dev/MediaExtractor/src/MediaExtractor.Api/MediaExtractor.Api.csproj",
+      "projectName": "MediaExtractor.Api",
+      "projectPath": "/Users/goktugacikgoz/Documents/dev/MediaExtractor/src/MediaExtractor.Api/MediaExtractor.Api.csproj",
+      "packagesPath": "/Users/goktugacikgoz/.nuget/packages/",
+      "outputPath": "/Users/goktugacikgoz/Documents/dev/MediaExtractor/src/MediaExtractor.Api/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/goktugacikgoz/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "/Users/goktugacikgoz/Documents/dev/MediaExtractor/src/MediaExtractor.Application/MediaExtractor.Application.csproj": {
+              "projectPath": "/Users/goktugacikgoz/Documents/dev/MediaExtractor/src/MediaExtractor.Application/MediaExtractor.Application.csproj"
+            },
+            "/Users/goktugacikgoz/Documents/dev/MediaExtractor/src/MediaExtractor.Infrastructure/MediaExtractor.Infrastructure.csproj": {
+              "projectPath": "/Users/goktugacikgoz/Documents/dev/MediaExtractor/src/MediaExtractor.Infrastructure/MediaExtractor.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.100"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.OpenApi": {
+            "target": "Package",
+            "version": "[9.0.8, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/9.0.8/libexec/sdk/9.0.109/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
