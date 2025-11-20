@@ -1,0 +1,52 @@
+##############
+# .NET / C#
+##############
+bin/
+obj/
+out/
+
+# VS / Rider
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+##############
+# JetBrains Rider / IntelliJ
+##############
+.idea/
+*.iml
+*.ipr
+*.iws
+
+##############
+# OS Junk
+##############
+.DS_Store
+Thumbs.db
+
+##############
+# Logs / temp
+##############
+*.log
+*.tlogs
+.vs/
+.vscode/
+
+##############
+# Build artifacts
+##############
+*.dll
+*.exe
+*.pdb
+*.cache
+*.mdb
+*.db
+
+##############
+# Rider settings nested
+##############
+.idea.MediaExtractor/
+MediaExtractor/.idea/
+src/**/.idea/
