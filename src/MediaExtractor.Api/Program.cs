@@ -5,6 +5,8 @@ using MediaExtractor.Application.UseCases;
 using MediaExtractor.Domain.Media;
 using MediaExtractor.Infrastructure.YouTube;
 using Microsoft.AspNetCore.Mvc;
+using MediaExtractor.Domain.YouTube; 
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +14,11 @@ builder.Services.AddSingleton<DeviceDetector>();
 builder.Services.AddSingleton<ISpoofUserAgentProvider, SpoofUserAgentProvider>();
 builder.Services.AddSingleton<GetSpoofedUserAgent>();
 builder.Services.AddScoped<IMediaHtmlFetcher, YouTubeHttpClient>();
-builder.Services.AddScoped<GetYoutubeHtmlUseCase>();
+builder.Services.AddScoped<YouTubeHttpClient>();  
 
+builder.Services.AddScoped<GetYoutubeHtmlUseCase>();
+builder.Services.AddScoped<IPlayerResponseExtractor, PlayerResponseExtractor>();
+builder.Services.AddScoped<ExtractPlayerResponseUseCase>();
 
 var app = builder.Build();
 
@@ -42,5 +47,35 @@ app.MapGet("/youtube/test", async (
         htmlLength = html.Length
     });
 });
+
+app.MapGet("/youtube/streams", async (
+    [FromQuery] string url,
+    HttpContext ctx,
+    [FromServices] YouTubeHttpClient yt,
+    [FromServices] ExtractPlayerResponseUseCase extractor
+) =>
+{
+    var ua = ctx.Request.Headers["User-Agent"].ToString();
+
+    var html = await yt.GetHtmlAsync(url, ua);
+
+    var result = extractor.Execute(html);
+
+    return Results.Json(new {
+        title = result.Title,
+        videoId = result.VideoId,
+        streamCount = result.Streams.Count,
+        streams = result.Streams.Select(s => new {
+            s.Itag,
+            s.Format,
+            s.Type,
+            s.Quality,
+            hasCipher = s.Url == "[signatureCipher]",
+            url = s.Url
+        })
+    });
+});
+
+
 
 app.Run();
