@@ -19,6 +19,8 @@ builder.Services.AddScoped<YouTubeHttpClient>();
 builder.Services.AddScoped<GetYoutubeHtmlUseCase>();
 builder.Services.AddScoped<IPlayerResponseExtractor, PlayerResponseExtractor>();
 builder.Services.AddScoped<ExtractPlayerResponseUseCase>();
+builder.Services.AddScoped<IStreamSelector, StreamSelector>();
+builder.Services.AddScoped<SelectStreamByItagUseCase>();
 
 var app = builder.Build();
 
@@ -73,6 +75,31 @@ app.MapGet("/youtube/streams", async (
             hasCipher = s.Url == "[signatureCipher]",
             url = s.Url
         })
+    });
+});
+
+app.MapGet("/youtube/stream", async (
+    [FromQuery] string url,
+    [FromQuery] int itag,
+    HttpContext ctx,
+    [FromServices] YouTubeHttpClient yt,
+    [FromServices] ExtractPlayerResponseUseCase extractor,
+    [FromServices] SelectStreamByItagUseCase selectorUseCase
+) =>
+{
+    var ua = ctx.Request.Headers["User-Agent"].ToString();
+
+    var html = await yt.GetHtmlAsync(url, ua);
+    var response = extractor.Execute(html);
+
+    var selected = selectorUseCase.Execute(response, itag);
+
+    return Results.Json(new {
+        selected.Itag,
+        selected.Format,
+        selected.Type,
+        selected.Quality,
+        selected.Url
     });
 });
 
