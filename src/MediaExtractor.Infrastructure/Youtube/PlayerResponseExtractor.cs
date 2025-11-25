@@ -1,11 +1,20 @@
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using MediaExtractor.Domain.Media;
+using MediaExtractor.Application.YouTube;
+using MediaExtractor.Domain.YouTube;
 
 namespace MediaExtractor.Infrastructure.YouTube
 {
     public class PlayerResponseExtractor : IPlayerResponseExtractor
     {
+        private readonly ISignatureCipherParser _cipherParser;
+
+        public PlayerResponseExtractor(ISignatureCipherParser cipherParser)
+        {
+            _cipherParser = cipherParser;
+        }
+
         private static readonly Regex PlayerResponseRegex = new(
             @"(?:window\[""ytInitialPlayerResponse""\]\s*=\s*|ytInitialPlayerResponse\s*=\s*)(\{.*?""streamingData"".*?});",
             RegexOptions.Singleline | RegexOptions.Compiled);
@@ -58,7 +67,7 @@ namespace MediaExtractor.Infrastructure.YouTube
             };
         }
 
-        private static void ExtractStreamsFromArray(
+        private void ExtractStreamsFromArray(
             JsonElement arrayElement,
             List<MediaStream> target,
             string? typeOverride)
@@ -81,13 +90,23 @@ namespace MediaExtractor.Infrastructure.YouTube
                 else if (item.TryGetProperty("quality", out var q))
                     quality = q.GetString() ?? "";
 
-                string url = "";
+                string? url = null;
+                SignatureCipher? cipher = null;
+                bool hasCipher = false;
+                
+
                 if (item.TryGetProperty("url", out var urlProp))
+                {
                     url = urlProp.GetString() ?? "";
-                else if (item.TryGetProperty("signatureCipher", out var cipherProp))
-                    url = "[signatureCipher]";
+                }
+                else if (item.TryGetProperty("signatureCipher", out var sc))
+                {
+                    string raw = sc.GetString() ?? "";
+                    cipher = _cipherParser.Parse(raw);
+                }
 
                 string type;
+
                 if (!string.IsNullOrEmpty(typeOverride))
                 {
                     type = typeOverride;
@@ -110,7 +129,8 @@ namespace MediaExtractor.Infrastructure.YouTube
                     Format = format,
                     Type = type,
                     Quality = quality,
-                    Url = url
+                    Url = url,
+                    Cipher = cipher
                 });
             }
         }

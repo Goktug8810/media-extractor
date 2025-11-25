@@ -1,16 +1,19 @@
-namespace MediaExtractor.Application.UseCases;
-using Domain.Media;
-public class GetYoutubeHtmlUseCase
+using MediaExtractor.Domain.Media;
+
+namespace MediaExtractor.Application.UseCases
 {
-    private readonly IMediaHtmlFetcher _fetcher;
-
-    public GetYoutubeHtmlUseCase(IMediaHtmlFetcher fetcher)
+    public class GetYoutubeHtmlUseCase
     {
-        _fetcher = fetcher;
-    }
+        private readonly IMediaHtmlFetcher _fetcher;
 
-    public Task<(string html, Version protocol)> ExecuteWithProtocolAsync(string url, string? ua)
-    {
-        return _fetcher.GetHtmlWithProtocolAsync(url, ua);
+        public GetYoutubeHtmlUseCase(IMediaHtmlFetcher fetcher)
+        {
+            _fetcher = fetcher;
+        }
+
+        public Task<(string html, Version protocol)> ExecuteWithProtocolAsync(string url, string? ua)
+        {
+            return _fetcher.GetHtmlWithProtocolAsync(url, ua);
+        }
     }
 }
